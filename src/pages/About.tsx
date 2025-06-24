@@ -114,7 +114,7 @@ const About: React.FC = () => {
 
         <div className="mt-16">
           <a
-            href="\Darshan Soni (1).pdf"
+            href="\Darshan Soni.pdf"
             className="inline-flex items-center space-x-3 bg-emerald-600 hover:bg-emerald-700 px-8 py-4 rounded-lg transition-colors duration-300 text-white"
           >
             <FileText size={20} />
