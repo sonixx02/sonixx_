@@ -48,17 +48,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
            className="text-gray-400 hover:text-emerald-400 transition-colors duration-300">
           <Linkedin size={24} />
         </a>
-        <a href="/resume.pdf" download
-           className="text-gray-400 hover:text-emerald-400 transition-colors duration-300 flex items-center space-x-2">
-          <span className="sr-only">Download Resume</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v14m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
-        </a>
+        
       </div>
 
       {/* Email Icon */}
       <div ref={emailRef} className="fixed right-8 top-8 z-50">
-        <a href="mailto:soni.darshan0209@gmail.com" 
-           className="text-gray-400 hover:text-emerald-400 transition-colors duration-300">
+        <a
+          href="mailto:soni.darshan0209@gmail.com"
+          className="text-gray-400 hover:text-emerald-400 transition-colors duration-300"
+          title="Send email to soni.darshan0209@gmail.com"
+        >
           <Mail size={24} />
         </a>
       </div>

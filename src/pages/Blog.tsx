@@ -28,7 +28,7 @@ const Blog: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.7 }}
         >
-          Scripting life's odysseys, one blog at a time.
+          Building ideas into impact — one project and blog at a time.
         </motion.p>
         
         {/* Coming Soon Section */}
