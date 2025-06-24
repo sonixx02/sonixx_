@@ -19,7 +19,7 @@ const Blog: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7, type: 'spring' }}
         >
-          Hey, welcome to my <span className="text-emerald-400">Arc.</span>
+          Hey, welcome to my <span className="text-emerald-400">Space.</span>
         </motion.h1>
         
         <motion.p
