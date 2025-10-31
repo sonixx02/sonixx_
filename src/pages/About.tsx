@@ -82,20 +82,13 @@ const About: React.FC = () => {
               visible: { opacity: 1, y: 0 },
             }}
           >
-            I’m Darshan Soni, a Full-Stack Developer with a strong focus on
-            building modern, responsive, and scalable web applications using the
-            MERN stack (MongoDB, Express, React, Node.js). I am currently
-            pursuing my Bachelor’s degree in Information Technology from
-            Thadomal Shahani Engineering College. I enjoy developing efficient
-            solutions to real-world problems, working on interactive user
-            interfaces, and continuously learning new technologies. My technical
-            experience includes: Building frontend applications with React,
-            Vite, Tailwind CSS, Shadcn/UI, and GSAP for smooth user experiences
-            Developing secure and scalable backend services with Node.js,
-            Express, and MongoDB Solving over 150+ Data Structures and
-            Algorithms problems to strengthen my problem-solving skills
-            Participating in multiple hackathons and competitions, with
-            achievements including winning the Java Genix competition
+           I’m Darshan Soni, a Full-Stack Developer passionate about building modern, responsive, and scalable web applications using the MERN stack.
+
+I’m pursuing a B.Tech in Information Technology from Thadomal Shahani Engineering College (2022–2026) and currently working as a Full Stack Developer Intern at Winnovate Next Pvt. Ltd.
+
+With experience in React, Node.js, Express, and MongoDB, I’ve developed end-to-end projects, led the IETE-TSEC tech team, solved 350+ LeetCode problems, and won multiple hackathons for innovative solutions.
+
+I’m driven by curiosity, clean code, and the desire to build products that truly make an impact.
           </motion.p>
 
           <motion.p
@@ -106,7 +99,7 @@ const About: React.FC = () => {
           >
             Outside of
             development, I enjoy playing chess and football, and I am always
-            looking for new challenges to grow both technically and personally.
+            looking for new challenges to grow  technically .
           </motion.p>
 
           <div className="border-t border-gray-700 my-12"></div>

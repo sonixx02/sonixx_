@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Github, Twitter, Instagram, Linkedin, Mail } from 'lucide-react';
 import Navigation from './Navigation';
 import gsap from 'gsap';
+import LeetCode from './icons/LeetCode';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,6 +11,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
   const emailRef = useRef<HTMLDivElement>(null);
+  const mobileIconsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (sidebarRef.current) {
@@ -26,14 +28,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: 'power3.out' }
       );
     }
+    if (mobileIconsRef.current) {
+      gsap.fromTo(
+        mobileIconsRef.current,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: 'power3.out' }
+      );
+    }
   }, []);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
-      {/* Social Sidebar */}
-      <div ref={sidebarRef} className="fixed left-8 top-1/2 transform -translate-y-1/2 z-50 hidden md:flex flex-col space-y-6">
+      {/* Social Sidebar - Desktop */}
+      <div ref={sidebarRef} className="fixed left-4 sm:left-8 top-1/2 transform -translate-y-1/2 z-50 hidden md:flex flex-col space-y-6">
         <a href="https://github.com/sonixx02" target="_blank" rel="noopener noreferrer" 
-           className="text-gray-400 hover:text-emerald-400 transition-colors duration-300">
+           className="text-gray-400 hover:text-emerald-400 transition-colors duration-300"
+           title="Visit my GitHub profile"
+           aria-label="GitHub">
           <Github size={24} />
         </a>
         {/* <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
@@ -45,14 +56,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Instagram size={24} />
         </a> */}
         <a href="https://www.linkedin.com/in/soni-darshan-18125124a/" target="_blank" rel="noopener noreferrer"
-           className="text-gray-400 hover:text-emerald-400 transition-colors duration-300">
+           className="text-gray-400 hover:text-emerald-400 transition-colors duration-300"
+           title="Connect with me on LinkedIn"
+           aria-label="LinkedIn">
           <Linkedin size={24} />
         </a>
-        
+        <a href="https://leetcode.com/u/Sonieng/" target="_blank" rel="noopener noreferrer"
+           className="text-gray-400 hover:text-emerald-400 transition-colors duration-300"
+           title="Check my LeetCode profile"
+           aria-label="LeetCode">
+          <LeetCode size={24} />
+        </a>
       </div>
 
-      {/* Email Icon */}
-      <div ref={emailRef} className="fixed right-8 top-8 z-50">
+      {/* Email Icon - Desktop */}
+      <div ref={emailRef} className="fixed right-4 sm:right-8 top-8 z-50 hidden md:block">
         <a
           href="mailto:soni.darshan0209@gmail.com"
           className="text-gray-400 hover:text-emerald-400 transition-colors duration-300"
@@ -62,11 +80,41 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </a>
       </div>
 
+      {/* Mobile Social Icons */}
+      <div ref={mobileIconsRef} className="fixed bottom-6 left-0 right-0 z-50 md:hidden">
+        <div className="flex justify-center space-x-8 bg-zinc-950/90 backdrop-blur-sm py-4 px-6 mx-4 rounded-full border border-gray-800/50 shadow-lg">
+          <a href="https://github.com/sonixx02" target="_blank" rel="noopener noreferrer" 
+             className="text-gray-400 hover:text-emerald-400 transition-colors duration-300"
+             title="Visit my GitHub profile"
+             aria-label="GitHub">
+            <Github size={24} />
+          </a>
+          <a href="https://www.linkedin.com/in/soni-darshan-18125124a/" target="_blank" rel="noopener noreferrer"
+             className="text-gray-400 hover:text-emerald-400 transition-colors duration-300"
+             title="Connect with me on LinkedIn"
+             aria-label="LinkedIn">
+            <Linkedin size={24} />
+          </a>
+          <a href="https://leetcode.com/u/Sonieng/" target="_blank" rel="noopener noreferrer"
+             className="text-gray-400 hover:text-emerald-400 transition-colors duration-300"
+             title="Check my LeetCode profile"
+             aria-label="LeetCode">
+            <LeetCode size={24} />
+          </a>
+          <a href="mailto:soni.darshan0209@gmail.com"
+             className="text-gray-400 hover:text-emerald-400 transition-colors duration-300"
+             title="Send email to soni.darshan0209@gmail.com"
+             aria-label="Email me">
+            <Mail size={24} />
+          </a>
+        </div>
+      </div>
+
       {/* Navigation */}
       <Navigation />
 
       {/* Main Content */}
-      <main className="pt-20">
+      <main className="pt-20 sm:pt-24 md:pt-28 pb-20 md:pb-0">
         {children}
       </main>
     </div>

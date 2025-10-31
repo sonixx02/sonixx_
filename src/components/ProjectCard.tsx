@@ -16,68 +16,51 @@ interface ProjectCardProps {
   project: Project;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-  return (
-    <motion.div
-      className="bg-gray-900/50 rounded-lg overflow-hidden border border-gray-800 hover:border-emerald-400/30 transition-all duration-300 group"
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.03, boxShadow: '0 8px 32px rgba(16, 185, 129, 0.15)' }}
-      transition={{ duration: 0.5, type: 'spring', stiffness: 60 }}
-    >
-      <div className="aspect-video bg-gray-800 overflow-hidden flex flex-col items-center justify-center">
-        <img 
-          src={project.image} 
-          alt={project.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
-        {project.image.includes('placeholder') && (
-          <span className="text-xs text-gray-400 mt-2 block">Placeholder Image</span>
-        )}
-      </div>
-      
-      <div className="p-6">
-        <h3 className="text-2xl font-light mb-4 text-white group-hover:text-emerald-400 transition-colors duration-300">
-          {project.title}
-        </h3>
-        
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
+  <motion.div
+    className="flex justify-center"
+    variants={{
+      hidden: { opacity: 0, y: 20 },
+      visible: { opacity: 1, y: 0 }
+    }}
+  >
+    <div className="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 transition-all duration-300 hover:scale-[1.02] hover:border-emerald-400/50 shadow-lg w-full max-w-sm">
+      <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+      <div className="p-4 sm:p-6">
+        <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{project.title}</h3>
+        <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-4">{project.description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.map((tech) => (
-            <span key={tech} className="text-xs px-3 py-1 bg-gray-800 rounded-full text-gray-300 border border-gray-700">
+          {project.technologies.map((tech, index) => (
+            <span key={index} className="px-2 py-1 bg-gray-800 rounded-md text-xs text-gray-300">
               {tech}
             </span>
           ))}
         </div>
-        
-        <p className="text-gray-400 mb-6 leading-relaxed text-sm">
-          {project.description}
-        </p>
-        
-        <div className="flex gap-3">
-          <a 
+        <div className="flex gap-4">
+          <a
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-lg transition-colors duration-300 text-white text-sm flex-1 justify-center"
+            className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm"
           >
-            <span>Live Demo</span>
-            <ExternalLink size={14} />
+            <ExternalLink className="w-4 h-4" />
+            Demo
           </a>
-          
-          {project.github && project.github !== '#' && (
-            <a 
+          {project.github && (
+            <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg transition-colors duration-300 text-white text-sm"
+              className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm"
             >
-              <Github size={14} />
+              <Github className="w-4 h-4" />
+              Code
             </a>
           )}
         </div>
       </div>
-    </motion.div>
-  );
-};
+    </div>
+  </motion.div>
+);
 
 export default ProjectCard;
