@@ -1,7 +1,7 @@
 import { useRef, useState, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Crosshair from "./CrossHair";
+import Crosshair from "./Crosshair";
 
 interface CrosshairButtonProps {
   to: string;
