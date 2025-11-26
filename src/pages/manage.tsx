@@ -48,7 +48,7 @@ const ManagePosts: React.FC = () => {
           className="max-w-md w-full bg-zinc-900/50 backdrop-blur-md rounded-2xl p-8 border border-zinc-800 shadow-2xl"
         >
           <div className="flex flex-col items-center gap-4 mb-8">
-            <div className="p-4 bg-emerald-500/10 rounded-full text-emerald-400">
+            <div className="p-4 bg-red-500/10 rounded-full text-red-400">
               <Lock size={32} />
             </div>
             <h1 className="text-2xl font-bold text-white">Admin Access</h1>
@@ -60,12 +60,12 @@ const ManagePosts: React.FC = () => {
               placeholder="Enter PIN"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-950/50 text-white border border-zinc-800 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all text-center tracking-widest text-lg"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-950/50 text-white border border-zinc-800 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all text-center tracking-widest text-lg"
               autoFocus
             />
             <button
               type="submit"
-              className="w-full px-4 py-3 bg-emerald-500 text-white rounded-xl font-semibold hover:bg-emerald-600 transition-colors shadow-lg shadow-emerald-500/20"
+              className="w-full px-4 py-3 bg-red-500 text-white rounded-xl font-semibold hover:bg-red-600 transition-colors shadow-lg shadow-red-500/20"
             >
               Authenticate
             </button>
@@ -81,7 +81,7 @@ const ManagePosts: React.FC = () => {
         <div className="flex items-center justify-between mb-12">
           <h1 className="text-3xl font-bold text-white">Manage Posts</h1>
           <div className="px-4 py-2 bg-zinc-900 rounded-full border border-zinc-800 text-zinc-400 text-sm">
-            Total Posts: <span className="text-emerald-400 font-semibold">{posts.length}</span>
+            Total Posts: <span className="text-red-400 font-semibold">{posts.length}</span>
           </div>
         </div>
 
@@ -101,7 +101,7 @@ const ManagePosts: React.FC = () => {
                   className="group bg-zinc-900/50 hover:bg-zinc-900 rounded-xl p-6 border border-zinc-800 hover:border-zinc-700 transition-all flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
                 >
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-emerald-400 transition-colors">{post.title}</h3>
+                    <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-red-400 transition-colors">{post.title}</h3>
                     <p className="text-sm text-zinc-500">{post.date}</p>
                   </div>
                   <button

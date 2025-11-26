@@ -32,12 +32,12 @@ const BlogPosts: React.FC = () => {
           <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
             {tag ? (
               <span className="flex items-center gap-3">
-                <Tag className="text-emerald-400" />
+                <Tag className="text-red-400" />
                 {tag}
               </span>
             ) : (
               <>
-                Writing <span className="text-emerald-400">.</span>
+                Writing <span className="text-red-400">.</span>
               </>
             )}
           </h1>
@@ -60,15 +60,15 @@ const BlogPosts: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative bg-zinc-900/50 hover:bg-zinc-900 border border-zinc-800 hover:border-emerald-500/30 rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/10 flex flex-col h-full"
+                className="group relative bg-zinc-900/50 hover:bg-zinc-900 border border-zinc-800 hover:border-red-500/30 rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-red-500/10 flex flex-col h-full"
                 onClick={() => navigate(`/blog/posts/${post.slug}`)}
               >
-                <div className="flex items-center gap-2 text-xs text-emerald-400 font-medium mb-4 uppercase tracking-wider">
+                <div className="flex items-center gap-2 text-xs text-red-400 font-medium mb-4 uppercase tracking-wider">
                   <Calendar size={12} />
                   {post.date}
                 </div>
                 
-                <h2 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors line-clamp-2">
+                <h2 className="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors line-clamp-2">
                   {post.title}
                 </h2>
                 
@@ -78,7 +78,7 @@ const BlogPosts: React.FC = () => {
                   </p>
                 )}
 
-                <div className="flex items-center text-sm text-zinc-500 group-hover:text-emerald-400 transition-colors mt-auto pt-4 border-t border-zinc-800/50 group-hover:border-emerald-500/20">
+                <div className="flex items-center text-sm text-zinc-500 group-hover:text-red-400 transition-colors mt-auto pt-4 border-t border-zinc-800/50 group-hover:border-red-500/20">
                   Read Article
                   <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </div>

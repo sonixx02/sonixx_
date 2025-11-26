@@ -13,7 +13,7 @@
   }
 
   ::selection {
-    @apply bg-emerald-500/30 text-emerald-200;
+    @apply bg-red-500/30 text-red-200;
   }
 }
 
@@ -27,6 +27,6 @@
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500;
   }
 }

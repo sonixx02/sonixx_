@@ -28,8 +28,8 @@ const Blog: React.FC = () => {
     <div className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-4 sm:px-6 md:px-8">
       {/* Background Elements */}
       <div className="absolute inset-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute top-[20%] right-[20%] w-[30%] h-[30%] bg-emerald-500/10 rounded-full blur-[100px] animate-blob" />
-        <div className="absolute bottom-[20%] left-[20%] w-[30%] h-[30%] bg-purple-500/10 rounded-full blur-[100px] animate-blob animation-delay-2000" />
+        <div className="absolute top-[20%] right-[20%] w-[30%] h-[30%] bg-red-500/10 rounded-full blur-[100px] animate-blob" />
+        <div className="absolute bottom-[20%] left-[20%] w-[30%] h-[30%] bg-orange-500/10 rounded-full blur-[100px] animate-blob animation-delay-2000" />
       </div>
 
       <div className="max-w-4xl w-full mx-auto text-center z-10">
@@ -53,7 +53,7 @@ const Blog: React.FC = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <motion.button
-            className="group inline-flex items-center justify-center gap-2 bg-emerald-500 text-white px-8 py-3 rounded-full font-medium transition-all hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-500/25"
+            className="group inline-flex items-center justify-center gap-2 bg-red-500 text-white px-8 py-3 rounded-full font-medium transition-all hover:bg-red-600 hover:shadow-lg hover:shadow-red-500/25"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleExplore}
@@ -86,7 +86,7 @@ const Blog: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4 + index * 0.1 }}
-              className="px-4 py-2 bg-zinc-900/50 border border-zinc-800 text-zinc-400 hover:text-emerald-400 hover:border-emerald-500/50 rounded-full text-sm transition-all duration-300"
+              className="px-4 py-2 bg-zinc-900/50 border border-zinc-800 text-zinc-400 hover:text-red-400 hover:border-red-500/50 rounded-full text-sm transition-all duration-300"
               onClick={() => navigate(`/blog/posts?tag=${encodeURIComponent(tag)}`)}
             >
               {tag}

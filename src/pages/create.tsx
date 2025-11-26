@@ -111,18 +111,34 @@ const BlogEditor: React.FC = () => {
   return (
     <div className="min-h-screen px-4 sm:px-6 md:px-8 py-12 sm:py-20">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-white">Create New Post</h1>
+        <div className="flex justify-between items-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">Create New Post</h1>
           <button
             onClick={handleSave}
-            className="flex items-center gap-2 px-6 py-2.5 bg-emerald-500 text-white rounded-lg font-medium hover:bg-emerald-600 transition-colors shadow-lg shadow-emerald-500/20"
+            className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition-colors shadow-lg shadow-red-500/20 text-sm sm:text-base"
           >
             <Save size={18} />
-            Publish
+            <span>Publish</span>
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-180px)]">
+        {/* Mobile Tab Switcher */}
+        <div className="flex lg:hidden gap-2 mb-6 bg-zinc-900/50 p-1 rounded-lg border border-zinc-800 w-full sm:w-fit">
+          <button
+            onClick={() => setActiveTab('write')}
+            className={`flex-1 sm:flex-none px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'write' ? 'bg-red-500 text-white shadow-lg shadow-red-500/20' : 'text-zinc-400 hover:text-white'}`}
+          >
+            Write
+          </button>
+          <button
+            onClick={() => setActiveTab('preview')}
+            className={`flex-1 sm:flex-none px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'preview' ? 'bg-red-500 text-white shadow-lg shadow-red-500/20' : 'text-zinc-400 hover:text-white'}`}
+          >
+            Preview
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[calc(100vh-250px)] lg:h-[calc(100vh-180px)]">
           {/* Editor Column */}
           <div className={`flex flex-col gap-6 ${activeTab === 'preview' ? 'hidden lg:flex' : 'flex'}`}>
             <div className="space-y-4 h-full flex flex-col">
@@ -135,7 +151,7 @@ const BlogEditor: React.FC = () => {
                   placeholder="Post Title"
                   value={title}
                   onChange={e => setTitle(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
+                  className="w-full pl-10 pr-4 py-3 bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all"
                 />
               </div>
 
@@ -201,21 +217,6 @@ const BlogEditor: React.FC = () => {
                     <button onClick={() => setShowUrlInput({ type: 'video', url: '' })} className="p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded" title="Video"><Video size={16} /></button>
                     <button onClick={() => setShowUrlInput({ type: 'file', url: '' })} className="p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded" title="Document"><FileText size={16} /></button>
                   </div>
-
-                  <div className="ml-auto flex gap-2 lg:hidden">
-                    <button 
-                      onClick={() => setActiveTab('write')}
-                      className={`px-3 py-1 rounded-md text-xs font-medium ${activeTab === 'write' ? 'bg-emerald-500/10 text-emerald-400' : 'text-zinc-400'}`}
-                    >
-                      Write
-                    </button>
-                    <button 
-                      onClick={() => setActiveTab('preview')}
-                      className={`px-3 py-1 rounded-md text-xs font-medium ${activeTab === 'preview' ? 'bg-emerald-500/10 text-emerald-400' : 'text-zinc-400'}`}
-                    >
-                      Preview
-                    </button>
-                  </div>
                 </div>
 
                 {/* URL Input Modal/Popover */}
@@ -232,11 +233,11 @@ const BlogEditor: React.FC = () => {
                         placeholder={`Enter ${showUrlInput.type} URL...`}
                         value={showUrlInput.url}
                         onChange={e => setShowUrlInput({ ...showUrlInput, url: e.target.value })}
-                        className="flex-grow bg-zinc-800 border border-zinc-700 rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-emerald-500"
+                        className="flex-grow bg-zinc-800 border border-zinc-700 rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-red-500"
                         autoFocus
                         onKeyDown={e => e.key === 'Enter' && handleUrlSubmit()}
                       />
-                      <button onClick={handleUrlSubmit} className="p-1.5 bg-emerald-500 text-white rounded hover:bg-emerald-600"><Check size={14} /></button>
+                      <button onClick={handleUrlSubmit} className="p-1.5 bg-red-500 text-white rounded hover:bg-red-600"><Check size={14} /></button>
                       <button onClick={() => setShowUrlInput({ type: null, url: '' })} className="p-1.5 bg-zinc-700 text-zinc-300 rounded hover:bg-zinc-600"><X size={14} /></button>
                     </motion.div>
                   )}
@@ -279,11 +280,11 @@ const BlogEditor: React.FC = () => {
           {/* Preview Column */}
           <div className={`bg-zinc-900/30 border border-zinc-800 rounded-xl overflow-hidden flex flex-col ${activeTab === 'write' ? 'hidden lg:flex' : 'flex'}`}>
             <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800 bg-zinc-900/80">
-              <Eye size={16} className="text-emerald-400" />
-              <span className="text-sm font-medium text-emerald-400">Live Preview</span>
+              <Eye size={16} className="text-red-400" />
+              <span className="text-sm font-medium text-red-400">Live Preview</span>
             </div>
             <div className="flex-grow p-6 overflow-y-auto custom-scrollbar">
-              <div className="prose prose-invert prose-emerald max-w-none">
+              <div className="prose prose-invert prose-red max-w-none">
                 <h1>{title || 'Untitled Post'}</h1>
                 <ReactMarkdown
                   rehypePlugins={[rehypeRaw]}
@@ -302,7 +303,7 @@ const BlogEditor: React.FC = () => {
                           {String(children).replace(/\n$/, '')}
                         </SyntaxHighlighter>
                       ) : (
-                        <code className="bg-zinc-800 px-1.5 py-0.5 rounded text-emerald-400 text-sm" {...props}>
+                        <code className="bg-zinc-800 px-1.5 py-0.5 rounded text-red-400 text-sm" {...props}>
                           {children}
                         </code>
                       );

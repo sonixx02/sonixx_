@@ -8,134 +8,192 @@ import {
   Terminal,
   Cpu,
   Trophy,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  User
 } from "lucide-react";
 
 const About: React.FC = () => {
-  const skills = [
-    { category: "Languages", items: ["JavaScript (ES6+)", "TypeScript", "Java", "Python", "C++"], icon: Code },
-    { category: "Frontend", items: ["React.js", "Next.js", "Tailwind CSS", "Framer Motion", "Redux"], icon: Terminal },
-    { category: "Backend", items: ["Node.js", "Express.js", "PostgreSQL", "MongoDB", "Appwrite"], icon: Database },
-    { category: "Tools", items: ["Git", "Docker", "AWS", "Vercel", "Postman"], icon: Cpu },
-  ];
+  const skills = {
+    languages: ["JavaScript", "TypeScript", "Java", "Python", "C++"],
+    frontend: ["React.js", "Next.js", "Tailwind CSS", "Framer Motion"],
+    backend: ["Node.js", "Express.js", "PostgreSQL", "MongoDB"],
+    tools: ["Git", "Docker", "AWS", "Vercel"]
+  };
 
   const achievements = [
-    {
-      title: "JavaGenex Winner",
-      description: "Winner of JavaGenex exhibition at TSEC for Java FullStack Desktop Application",
-      icon: Trophy
-    },
-    {
-      title: "Minithon 2.0 Winner",
-      description: "Created sustainable urban farming platform with AI voice assistant",
-      icon: Trophy
-    },
-    {
-      title: "Hackwarts Winner",
-      description: "Developed Apna Rakshak smart security system with AI criminal detection",
-      icon: Trophy
-    },
-    {
-      title: "SPIT Minithon Top 3",
-      description: "Top 3 position in collaboration with IIIT Bhubaneswar",
-      icon: Trophy
-    },
+    { title: "JavaGenex Winner", desc: "TSEC Java FullStack App" },
+    { title: "Minithon 2.0 Winner", desc: "Sustainable Urban Farming AI" },
+    { title: "Hackwarts Winner", desc: "Apna Rakshak Security System" },
+    { title: "SPIT Minithon Top 3", desc: "Collab with IIIT Bhubaneswar" }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div className="min-h-screen px-4 sm:px-6 md:px-8 py-12 sm:py-20 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
-        {/* Header Section */}
+    <div className="min-h-screen px-4 sm:px-6 md:px-8 py-20 sm:py-24 max-w-7xl mx-auto">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)]"
+      >
+        {/* 1. Intro Card (Large) */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+          variants={itemVariants}
+          className="md:col-span-2 lg:col-span-2 row-span-2 bg-zinc-900/50 border border-zinc-800 rounded-3xl p-8 flex flex-col justify-between hover:border-red-500/30 transition-colors group relative overflow-hidden"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8">
-            About <span className="text-gradient">Me</span>
-          </h1>
-          <div className="prose prose-invert max-w-none text-zinc-400 text-lg leading-relaxed space-y-6">
-            <p>
-              I’m <span className="text-white font-medium">Darshan Soni</span>, a Full-Stack Developer passionate about building modern, responsive, and scalable web applications using the MERN stack.
+          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+            <User size={120} />
+          </div>
+          <div>
+            <h2 className="text-zinc-400 font-medium mb-2">About Me</h2>
+            <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
+              I'm <span className="text-red-500">Darshan Soni</span>, a Full-Stack Developer crafting scalable web apps.
+            </h1>
+            <p className="text-zinc-400 leading-relaxed">
+              Currently a B.Tech IT student at TSEC (2022–2026) and Intern at Winnovate Next. I've solved 350+ LeetCode problems and love building pixel-perfect interfaces.
             </p>
-            <p>
-              I’m pursuing a B.Tech in Information Technology from Thadomal Shahani Engineering College (2022–2026) and currently working as a Full Stack Developer Intern at Winnovate Next Pvt. Ltd.
-            </p>
-            <p>
-              With experience in React, Node.js, Express, and MongoDB, I’ve developed end-to-end projects, led the IETE-TSEC tech team, solved 350+ LeetCode problems, and won multiple hackathons for innovative solutions.
-            </p>
+          </div>
+          <div className="flex gap-4 mt-6">
+            <a href="https://github.com/sonixx02" target="_blank" rel="noreferrer" className="p-2 bg-zinc-800 rounded-full hover:bg-red-600 hover:text-white transition-all">
+              <Github size={20} />
+            </a>
+            <a href="https://linkedin.com/in/darshan-soni" target="_blank" rel="noreferrer" className="p-2 bg-zinc-800 rounded-full hover:bg-blue-600 hover:text-white transition-all">
+              <Linkedin size={20} />
+            </a>
+            <a href="mailto:darshan@example.com" className="p-2 bg-zinc-800 rounded-full hover:bg-green-600 hover:text-white transition-all">
+              <Mail size={20} />
+            </a>
           </div>
         </motion.div>
 
-        {/* Skills Section */}
+        {/* 2. Resume Card */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="mb-20"
+          variants={itemVariants}
+          className="md:col-span-1 bg-gradient-to-br from-red-600 to-orange-600 rounded-3xl p-6 flex flex-col justify-between text-white hover:scale-[1.02] transition-transform cursor-pointer"
+          onClick={() => window.open("/Darshan Soni.pdf", "_blank")}
         >
-          <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-2">
-            <Code className="text-emerald-400" /> Technical Skills
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {skills.map((skill, index) => (
-              <div key={index} className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-400">
-                    <skill.icon size={20} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">{skill.category}</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {skill.items.map((item, i) => (
-                    <span key={i} className="px-3 py-1 bg-zinc-800 rounded-full text-sm text-zinc-300 border border-zinc-700">
-                      {item}
-                    </span>
-                  ))}
+          <div className="flex justify-between items-start">
+            <FileText size={32} />
+            <ExternalLink size={20} className="opacity-70" />
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold mb-1">Resume</h3>
+            <p className="text-red-100 text-sm">View my professional journey</p>
+          </div>
+        </motion.div>
+
+        {/* 3. Location/Info Card */}
+        <motion.div
+          variants={itemVariants}
+          className="md:col-span-1 bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6 flex flex-col justify-center items-center text-center hover:border-orange-500/30 transition-colors"
+        >
+          <div className="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center mb-4 text-orange-500">
+            <MapPin size={24} />
+          </div>
+          <h3 className="text-white font-semibold">Mumbai, India</h3>
+          <p className="text-zinc-500 text-sm">Open to remote work</p>
+        </motion.div>
+
+        {/* 4. Skills - Languages */}
+        <motion.div
+          variants={itemVariants}
+          className="md:col-span-1 bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6 hover:border-red-500/30 transition-colors"
+        >
+          <div className="flex items-center gap-2 mb-4 text-red-400">
+            <Code size={20} />
+            <h3 className="font-semibold text-white">Languages</h3>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {skills.languages.map((skill) => (
+              <span key={skill} className="text-xs px-2 py-1 bg-zinc-800 rounded-md text-zinc-300">{skill}</span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* 5. Skills - Frontend */}
+        <motion.div
+          variants={itemVariants}
+          className="md:col-span-1 bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6 hover:border-orange-500/30 transition-colors"
+        >
+          <div className="flex items-center gap-2 mb-4 text-orange-400">
+            <Terminal size={20} />
+            <h3 className="font-semibold text-white">Frontend</h3>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {skills.frontend.map((skill) => (
+              <span key={skill} className="text-xs px-2 py-1 bg-zinc-800 rounded-md text-zinc-300">{skill}</span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* 6. Achievements (Wide) */}
+        <motion.div
+          variants={itemVariants}
+          className="md:col-span-2 bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6 hover:border-red-500/30 transition-colors"
+        >
+          <div className="flex items-center gap-2 mb-6 text-yellow-500">
+            <Trophy size={24} />
+            <h3 className="text-xl font-bold text-white">Achievements</h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {achievements.map((ach, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0" />
+                <div>
+                  <h4 className="text-white font-medium text-sm">{ach.title}</h4>
+                  <p className="text-zinc-500 text-xs">{ach.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* Achievements Section */}
+        {/* 7. Skills - Backend & Tools */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="mb-16"
+          variants={itemVariants}
+          className="md:col-span-2 lg:col-span-2 bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6 hover:border-orange-500/30 transition-colors flex flex-col sm:flex-row gap-8"
         >
-          <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-2">
-            <Trophy className="text-emerald-400" /> Achievements
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {achievements.map((achievement, index) => (
-              <div key={index} className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 hover:bg-zinc-900 transition-colors">
-                <h3 className="text-lg font-semibold text-white mb-2">{achievement.title}</h3>
-                <p className="text-zinc-400 text-sm">{achievement.description}</p>
-              </div>
-            ))}
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-4 text-purple-400">
+              <Database size={20} />
+              <h3 className="font-semibold text-white">Backend</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {skills.backend.map((skill) => (
+                <span key={skill} className="text-xs px-2 py-1 bg-zinc-800 rounded-md text-zinc-300">{skill}</span>
+              ))}
+            </div>
+          </div>
+          <div className="w-px bg-zinc-800 hidden sm:block" />
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-4 text-blue-400">
+              <Cpu size={20} />
+              <h3 className="font-semibold text-white">Tools</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {skills.tools.map((skill) => (
+                <span key={skill} className="text-xs px-2 py-1 bg-zinc-800 rounded-md text-zinc-300">{skill}</span>
+              ))}
+            </div>
           </div>
         </motion.div>
 
-        {/* Resume Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-        >
-          <a
-            href="/Darshan Soni.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-emerald-500/25"
-          >
-            <FileText size={20} />
-            Download Resume
-            <ExternalLink size={16} />
-          </a>
-        </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -37,10 +37,10 @@ const Navigation: React.FC = () => {
         <div className="flex justify-between items-center h-20">
           <Link 
             to="/" 
-            className="text-2xl font-bold tracking-tighter text-white hover:text-emerald-400 transition-colors duration-300"
+            className="text-2xl font-bold tracking-tighter text-white hover:text-red-400 transition-colors duration-300"
             onClick={closeMenu}
           >
-            ds<span className="text-emerald-500">.</span>
+            ds<span className="text-red-500">.</span>
           </Link>
 
           {/* Mobile menu button */}
@@ -60,12 +60,12 @@ const Navigation: React.FC = () => {
                 to={item.path}
                 className={`text-sm font-medium transition-colors duration-300 relative group ${
                   location.pathname === item.path
-                    ? 'text-emerald-400'
+                    ? 'text-red-400'
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
                 {item.label}
-                <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-emerald-500 transform origin-left transition-transform duration-300 ${
+                <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-red-500 transform origin-left transition-transform duration-300 ${
                   location.pathname === item.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                 }`} />
               </Link>
@@ -91,7 +91,7 @@ const Navigation: React.FC = () => {
                     onClick={closeMenu}
                     className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
                       location.pathname === item.path
-                        ? 'text-emerald-400 bg-emerald-500/10'
+                        ? 'text-red-400 bg-red-500/10'
                         : 'text-zinc-400 hover:text-white hover:bg-white/5'
                     }`}
                   >
