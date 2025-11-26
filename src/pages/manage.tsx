@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useBlogPosts } from '../hooks/useLocalStorage';
-import { X, Lock, Plus } from 'lucide-react';
-// import { getAvailableNotionBlogs, importNotionBlog } from '../utils/notionImport';
+import { X, Lock, Trash2, AlertCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const ADMIN_PIN = '0209'; // You can change this to your desired PIN
+const ADMIN_PIN = '0209';
 
 const ManagePosts: React.FC = () => {
   const [pin, setPin] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const { posts, deletePost, addPost } = useBlogPosts();
+  const { posts, deletePost } = useBlogPosts();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [postToDelete, setPostToDelete] = useState<string | null>(null);
 
@@ -41,124 +41,124 @@ const ManagePosts: React.FC = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen px-8 py-16 flex flex-col items-center justify-center">
-        <div className="max-w-md w-full bg-gray-900 rounded-xl p-8 border border-gray-800 shadow-lg">
-          <div className="flex items-center gap-3 mb-6">
-            <Lock className="text-emerald-400" size={24} />
-            <h1 className="text-2xl font-semibold text-emerald-400">Admin Access</h1>
+      <div className="min-h-screen px-4 flex flex-col items-center justify-center">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-md w-full bg-zinc-900/50 backdrop-blur-md rounded-2xl p-8 border border-zinc-800 shadow-2xl"
+        >
+          <div className="flex flex-col items-center gap-4 mb-8">
+            <div className="p-4 bg-emerald-500/10 rounded-full text-emerald-400">
+              <Lock size={32} />
+            </div>
+            <h1 className="text-2xl font-bold text-white">Admin Access</h1>
+            <p className="text-zinc-400 text-center text-sm">Please enter your PIN to manage blog posts.</p>
           </div>
-          <form onSubmit={handlePinSubmit}>
+          <form onSubmit={handlePinSubmit} className="space-y-4">
             <input
               type="password"
               placeholder="Enter PIN"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
-              className="w-full mb-4 px-4 py-2 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-emerald-400"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-950/50 text-white border border-zinc-800 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all text-center tracking-widest text-lg"
+              autoFocus
             />
             <button
               type="submit"
-              className="w-full px-4 py-2 bg-emerald-400 text-black rounded-lg font-semibold hover:bg-emerald-500 transition-colors duration-200"
+              className="w-full px-4 py-3 bg-emerald-500 text-white rounded-xl font-semibold hover:bg-emerald-600 transition-colors shadow-lg shadow-emerald-500/20"
             >
               Authenticate
             </button>
           </form>
-        </div>
+        </motion.div>
       </div>
     );
   }
 
-//   const [isImporting, setIsImporting] = useState(false);
-
-//   const handleImportNotion = async () => {
-//     try {
-//       setIsImporting(true);
-//       const blogs = getAvailableNotionBlogs();
-//       for (const blog of blogs) {
-//         try {
-//           const importedBlog = await importNotionBlog(blog);
-//           await addPost(importedBlog);
-//         } catch (error) {
-//           console.error(`Error importing blog "${blog.title}":`, error);
-//           // Continue with other blogs even if one fails
-//         }
-//       }
-//       alert('Successfully imported available blogs');
-//     } catch (error) {
-//       alert('Error importing blogs: ' + (error instanceof Error ? error.message : String(error)));
-//     } finally {
-//       setIsImporting(false);
-//     }
-//   };
-
   return (
-    <div className="min-h-screen px-4 sm:px-6 md:px-8 py-12 sm:py-16 flex flex-col items-center">
-      <div className="max-w-3xl w-full">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-8">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-emerald-400">Manage Blog Posts</h1>
-          {/* <button
-            onClick={handleImportNotion}
-            disabled={isImporting}
-            className="flex items-center gap-2 px-4 py-2 bg-emerald-400 text-black rounded-lg hover:bg-emerald-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto justify-center sm:justify-start"
-          >
-            <Plus size={20} />
-            <span>{isImporting ? 'Importing...' : 'Import from Notion'}</span>
-          </button> */}
+    <div className="min-h-screen px-4 sm:px-6 md:px-8 py-12 sm:py-20">
+      <div className="max-w-4xl mx-auto">
+        <div className="flex items-center justify-between mb-12">
+          <h1 className="text-3xl font-bold text-white">Manage Posts</h1>
+          <div className="px-4 py-2 bg-zinc-900 rounded-full border border-zinc-800 text-zinc-400 text-sm">
+            Total Posts: <span className="text-emerald-400 font-semibold">{posts.length}</span>
+          </div>
         </div>
-        <div className="space-y-4 sm:space-y-6">
+
+        <div className="space-y-4">
           {posts.length === 0 ? (
-            <div className="text-gray-400 text-center py-8">No blog posts found.</div>
+            <div className="text-center py-20 bg-zinc-900/30 rounded-2xl border border-zinc-800 border-dashed">
+              <p className="text-zinc-500">No blog posts found.</p>
+            </div>
           ) : (
-            posts.map((post) => (
-              <div
-                key={post.slug}
-                className="bg-gray-900 rounded-lg p-4 sm:p-6 border border-gray-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0"
-              >
-                <div className="w-full sm:w-auto">
-                  <div className="text-sm text-gray-400 mb-1">{post.date}</div>
-                  <div className="text-lg sm:text-xl text-white">{post.title}</div>
-                </div>
-                <button
-                  onClick={() => handleDeleteClick(post.slug)}
-                  className="p-2 text-red-400 hover:text-red-300 transition-colors w-full sm:w-auto flex justify-center sm:justify-start items-center gap-2 border border-red-400/20 sm:border-0 rounded-lg sm:rounded-none"
-                  title="Delete post"
+            <AnimatePresence>
+              {posts.map((post) => (
+                <motion.div
+                  key={post.slug}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  className="group bg-zinc-900/50 hover:bg-zinc-900 rounded-xl p-6 border border-zinc-800 hover:border-zinc-700 transition-all flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
                 >
-                  <X size={20} />
-                  <span className="sm:hidden">Delete Post</span>
-                </button>
-              </div>
-            ))
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-emerald-400 transition-colors">{post.title}</h3>
+                    <p className="text-sm text-zinc-500">{post.date}</p>
+                  </div>
+                  <button
+                    onClick={() => handleDeleteClick(post.slug)}
+                    className="flex items-center gap-2 px-4 py-2 text-red-400 hover:text-white hover:bg-red-500/10 rounded-lg transition-colors border border-transparent hover:border-red-500/20"
+                  >
+                    <Trash2 size={18} />
+                    <span className="text-sm font-medium">Delete</span>
+                  </button>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           )}
         </div>
       </div>
 
       {/* Confirmation Modal */}
-      {showConfirmation && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-gray-900 rounded-xl p-4 sm:p-6 border border-gray-800 max-w-md w-full mx-4">
-            <h2 className="text-lg sm:text-xl text-white mb-3 sm:mb-4">Confirm Deletion</h2>
-            <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
-              Are you sure you want to delete this blog post? This action cannot be undone.
-            </p>
-            <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 sm:justify-end">
-              <button
-                onClick={() => {
-                  setShowConfirmation(false);
-                  setPostToDelete(null);
-                }}
-                className="w-full sm:w-auto px-4 py-2 text-gray-300 hover:text-white transition-colors border border-gray-600 rounded-lg sm:border-0 sm:rounded-none"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmDelete}
-                className="w-full sm:w-auto px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-              >
-                Delete
-              </button>
-            </div>
+      <AnimatePresence>
+        {showConfirmation && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 max-w-md w-full shadow-2xl"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 bg-red-500/10 rounded-full text-red-400">
+                  <AlertCircle size={24} />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-white">Delete Post?</h2>
+                  <p className="text-zinc-400 text-sm">This action cannot be undone.</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-3 justify-end">
+                <button
+                  onClick={() => {
+                    setShowConfirmation(false);
+                    setPostToDelete(null);
+                  }}
+                  className="px-4 py-2 text-zinc-300 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-medium shadow-lg shadow-red-500/20"
+                >
+                  Delete Post
+                </button>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 };

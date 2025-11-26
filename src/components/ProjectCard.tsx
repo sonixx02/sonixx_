@@ -18,43 +18,61 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
   <motion.div
-    className="flex justify-center"
     variants={{
       hidden: { opacity: 0, y: 20 },
       visible: { opacity: 1, y: 0 }
     }}
+    className="group relative"
   >
-    <div className="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 transition-all duration-300 hover:scale-[1.02] hover:border-emerald-400/50 shadow-lg w-full max-w-sm">
-      <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
-      <div className="p-4 sm:p-6">
-        <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">{project.title}</h3>
-        <p className="text-gray-400 text-sm sm:text-base mb-4 line-clamp-4">{project.description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
+    <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 blur opacity-20"></div>
+    <div className="relative h-full bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 flex flex-col">
+      <div className="relative h-48 overflow-hidden">
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300 z-10" />
+        <img 
+          src={project.image} 
+          alt={project.title} 
+          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" 
+        />
+      </div>
+      
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
+          {project.title}
+        </h3>
+        <p className="text-zinc-400 text-sm leading-relaxed mb-6 flex-grow">
+          {project.description}
+        </p>
+        
+        <div className="flex flex-wrap gap-2 mb-6">
           {project.technologies.map((tech, index) => (
-            <span key={index} className="px-2 py-1 bg-gray-800 rounded-md text-xs text-gray-300">
+            <span 
+              key={index} 
+              className="px-2.5 py-1 bg-zinc-800/50 border border-zinc-700/50 rounded-full text-xs font-medium text-zinc-300"
+            >
               {tech}
             </span>
           ))}
         </div>
-        <div className="flex gap-4">
+        
+        <div className="flex items-center gap-4 pt-4 border-t border-zinc-800">
           <a
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm"
+            className="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-emerald-400 transition-colors"
           >
-            <ExternalLink className="w-4 h-4" />
-            Demo
+            <ExternalLink size={16} />
+            Live Demo
           </a>
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm"
+              className="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-emerald-400 transition-colors"
             >
-              <Github className="w-4 h-4" />
-              Code
+              <Github size={16} />
+              Source Code
             </a>
           )}
         </div>
